@@ -1,0 +1,5 @@
+- Formatar a data da tarefa enviada para API para ISO
+- Form de data muda na pagina, mas nao do form.date
+- Criar componente toast
+- Pesquisar
+- Carregar projetos
