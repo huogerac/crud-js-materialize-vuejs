@@ -3,3 +3,12 @@
 - Criar componente toast
 - Pesquisar
 - Carregar projetos
+
+
+  "liveServer.settings.ignoreFiles": [
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts",
+    "**/*.json"
+  ],

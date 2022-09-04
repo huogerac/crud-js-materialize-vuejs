@@ -24,17 +24,33 @@ var app = new Vue({
     mostrarNovaTarefa() {
       this.exibir.forms = true
       this.exibir.lista = false
+      this.form.cabecalho = `Nova tarefa`
+      this.form.btn = 'Adicionar'
+      this.form.title = ''
+      this.form.date = new Date().toLocaleString('pt').split(' ')[0]
     },
     mostrarTarefa(tarefaId) {
+      this.exibir.forms = true
+      this.exibir.lista = false
+      this.form.btn = 'Alterar'
       getTask(tarefaId, (tarefa) => {
+        this.form.cabecalho = `Alterar tarefa #${tarefa.id}`
         this.form.title = tarefa.title
         this.form.project = tarefa.project
         this.form.date = tarefa.date
         this.form.id = tarefa.id
-        this.exibir.forms = true
-        this.exibir.lista = false
-        this.form.cabecalho = `Alterar tarefa #${tarefa.id}`
-        this.form.btn = 'Alterar'
+      })
+    },
+    mostrarTarefaExcluir(tarefaId) {
+      this.exibir.forms = true
+      this.exibir.lista = false
+      this.form.btn = 'Excluir'
+      getTask(tarefaId, (tarefa) => {
+        this.form.cabecalho = `Confirma excluir a tarefa #${tarefa.id}`
+        this.form.title = tarefa.title
+        this.form.project = tarefa.project
+        this.form.date = tarefa.date
+        this.form.id = tarefa.id
       })
     },
     salvarNovaTarefa() {
@@ -49,6 +65,14 @@ var app = new Vue({
       const { title, project, date } = this.form
       updateTask(tarefaId, title, project, date, (tarefa) => {
         console.log(`tarefa alterada: ${tarefa.id}`)
+        this.obterTarefas()
+        this.exibir.forms = false
+        this.exibir.lista = true
+      })
+    },
+    excluirTarefa(tarefaId) {
+      deleteTask(tarefaId, (tarefa) => {
+        console.log(`tarefa deletada: ${tarefa.id}`)
         this.obterTarefas()
         this.exibir.forms = false
         this.exibir.lista = true

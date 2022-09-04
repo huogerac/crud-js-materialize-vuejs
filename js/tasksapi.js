@@ -75,11 +75,11 @@ function updateTaskDate(taskId, date) {
 }
 
 // DELETE para apagar uma tarefa
-function deleteTask(taskId) {
+function deleteTask(taskId, cb) {
   axios
     .delete(`/tasks/${taskId}`)
     .then((response) => {
-      console.log("Tarefa salva", response.data);
+      cb(response.data);
     })
     .catch((error) => {
       console.log("erro:", error);

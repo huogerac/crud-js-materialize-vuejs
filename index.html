@@ -41,6 +41,7 @@
                   <span>{{ task.project }}</span>
                   <p>
                     <button @click="mostrarTarefa(task.id)" class="waves-effect waves-light btn-small">Editar</button>
+                    <button @click="mostrarTarefaExcluir(task.id)" class="waves-effect waves-light btn-small">Excluir</button>
                   </p>
                 </li>
               </ul>
@@ -59,11 +60,12 @@
                 type="text"
                 class="validate"
                 v-model="form.title"
+                :disabled="form.btn == 'Excluir'"
               />
               <label for="title">Tarefa</label>
             </div>
             <div class="input-field col s6">
-              <select v-model="form.project">
+              <select v-model="form.project" :disabled="form.btn == 'Excluir'">
                 <option value="" disabled selected>Escolha um projeto</option>
                 <option v-for="projeto in projects" :value="projeto.id">
                   {{ projeto.name }}
@@ -72,11 +74,12 @@
               <label>Projeto</label>
             </div>
             <div class="input-field col s6">
-              <input type="text" class="datepicker" v-model="form.date"/>
+              <input type="text" class="datepicker" v-model="form.date" :disabled="form.btn == 'Excluir'"/>
               <label for="date">Data Vencimento</label>
             </div>
             <div class="col s12">
               <button v-if="form.btn =='Adicionar'" @click="salvarNovaTarefa" class="btn waves-effect waves-light" type="submit" name="action">{{ form.btn }}</button>
+              <button v-else-if="form.btn == 'Excluir'" @click="excluirTarefa(form.id)" class="btn waves-effect waves-light" type="submit" name="action">{{ form.btn }}</button>
               <button v-else @click="salvarTarefa(form.id)" class="btn waves-effect waves-light" type="submit" name="action">{{ form.btn }}</button>
             </div>
           </div>
