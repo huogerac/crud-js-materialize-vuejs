@@ -19,7 +19,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="./css/date.css" />
+    <link rel="stylesheet" href="./css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
   </head>
 
@@ -38,7 +38,7 @@
               <ul class="collection">
                 <li v-for="task in tasks" class="collection-item">
                   <h4>{{ task.title }}</h4>
-                  <span>{{ task.project }}</span>
+                  <span class="task-badge">{{ task.project }}</span>
                   <p>
                     <button @click="mostrarTarefa(task.id)" class="waves-effect waves-light btn-small">Editar</button>
                     <button @click="mostrarTarefaExcluir(task.id)" class="waves-effect waves-light btn-small">Excluir</button>
@@ -65,13 +65,19 @@
               <label for="title">Tarefa</label>
             </div>
             <div class="input-field col s6">
-              <select v-model="form.project" :disabled="form.btn == 'Excluir'">
-                <option value="" disabled selected>Escolha um projeto</option>
-                <option v-for="projeto in projects" :value="projeto.id">
-                  {{ projeto.name }}
-                </option>
-              </select>
-              <label>Projeto</label>
+              <input
+                placeholder="Entre com um projeto"
+                id="project"
+                type="text"
+                class="validate"
+                v-model="form.project"
+                :list="'projectsList'"
+                :disabled="form.btn == 'Excluir'"
+              />
+              <label for="project">Project</label>
+              <datalist id="projectsList">
+                <option v-for="p in projects" :value="p.project"></option>
+              </datalist>
             </div>
             <div class="input-field col s6">
               <input type="text" class="datepicker" v-model="form.date" :disabled="form.btn == 'Excluir'"/>
@@ -85,7 +91,7 @@
           </div>
         </div>   
         <!-- FIM ADD-->
-        <div class="add">
+        <div class="add" v-show="!exibir.forms">
           <button
             class="btn-floating btn-large waves-effect waves-light red"
             @click="mostrarNovaTarefa"
@@ -104,10 +110,9 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-    <!-- JS Dates-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
     <!-- TODO APP -->
     <script src="./js/tasksapi.js"></script>
+    <script src="./js/projectsapi.js"></script>
     <script src="./js/appvue.js"></script>
 
     <script>

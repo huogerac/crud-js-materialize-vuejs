@@ -7,7 +7,7 @@ var app = new Vue({
         cabecalho: 'Nova tarefa',
         btn: 'Adicionar',
         title: '',
-        project: 1,
+        project: '',
         date: new Date().toLocaleString('pt').split(' ')[0]
     },
     exibir: {
@@ -20,6 +20,11 @@ var app = new Vue({
       getTasks((tasks) => {
         this.tasks = tasks;
       });
+    },
+    obterProjetos() {
+      getProjects((projetos) => {
+        this.projects = projetos
+      })
     },
     mostrarNovaTarefa() {
       this.exibir.forms = true
@@ -81,5 +86,6 @@ var app = new Vue({
   },
   created() {
     this.obterTarefas()
+    this.obterProjetos()
   },
 });
