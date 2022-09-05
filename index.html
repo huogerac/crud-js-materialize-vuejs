@@ -31,14 +31,19 @@
 
       <div class="container">
         <div v-show="exibir.lista" class="section task-list">
+          <div class="row">
+            <div class="col s12">
+              <input type="text" class="search" placeholder="Pesquisar tarefa..." name="pesquisar">
+            </div>
+          </div>
           <!--   Icon Section   -->
           <div class="row">
             <div class="col s12">
               <!-- New tasks area-->
               <ul class="collection">
                 <li v-for="task in tasks" class="collection-item">
-                  <h4>{{ task.title }}</h4>
-                  <span class="task-badge">{{ task.project }}</span>
+                  <h5>{{ task.title }} <span class="task-badge right-align">{{ task.project }}</span></h5>
+                  
                   <p>
                     <button @click="mostrarTarefa(task.id)" class="waves-effect waves-light btn-small">Editar</button>
                     <button @click="mostrarTarefaExcluir(task.id)" class="waves-effect waves-light btn-small">Excluir</button>
@@ -118,16 +123,11 @@
     <script>
       
       document.addEventListener("DOMContentLoaded", function () {
-        // Inicializa selects
-        var elems = document.querySelectorAll("select");
-        var instances = M.FormSelect.init(elems);
-
         // Inicializa Datas
         var elems = document.querySelectorAll(".datepicker");
         var instances = M.Datepicker.init(elems, {
           format: "dd/mm/yyyy",
         });
-
       });
 
     </script>

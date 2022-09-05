@@ -1,5 +1,25 @@
 .task-badge {
-    background-color: #ccc;
-    padding: 6px;
-    border-radius: 6px;
+  background-color: #929292;
+  color: white;
+  padding: 6px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  vertical-align: middle;
+}
+
+input[type="text"].search {
+  font-size: 1.3rem;
+  border-radius: 12px;
+  border: 1px solid #ddc5ad;
+  color: #f57c00;
+  width: 100%;
+  height: 30px;
+  padding-left: 10px;
+  padding: 6px 12px;
+}
+
+input[type="text"].search:focus {
+  outline: none;
+  border: 1px solid #5bb0a7;
+  color: #248178;
 }
