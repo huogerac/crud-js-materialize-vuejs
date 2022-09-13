@@ -5,6 +5,7 @@ import PrivateLayout from '@/layouts/PrivateLayout.vue'
 import HomeView from '@/views/HomeView.vue'
 import TasksListView from '@/views/TasksListView.vue'
 import TasksUpdateView from '@/views/TasksUpdateView.vue'
+import LoginView from '@/views/LoginView.vue'
 
 Vue.use(VueRouter)
 
@@ -17,6 +18,11 @@ const routes = [
         path: '',
         name: 'home',
         component: HomeView,
+      },
+      {
+        path: 'login',
+        name: 'login',
+        component: LoginView,
       },
     ],
   },
