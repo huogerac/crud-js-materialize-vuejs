@@ -11,7 +11,11 @@
             <v-card-actions>
               <v-list-item class="grow">
                 <v-row align="center" justify="end">
-                  <v-btn x-small icon color="grey"
+                  <v-btn
+                    x-small
+                    icon
+                    color="grey"
+                    :to="{ name: 'taskUpdate', params: { id: task.id } }"
                     ><v-icon>fas fa-pen fa-xs</v-icon></v-btn
                   >
                   <v-btn x-small icon color="grey"
@@ -39,6 +43,14 @@ export default {
         {
           id: 2,
           title: 'Task Two',
+        },
+        {
+          id: 3,
+          title: 'Task 3',
+        },
+        {
+          id: 4,
+          title: 'Task Four',
         },
       ],
     }

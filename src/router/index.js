@@ -4,6 +4,7 @@ import PublicLayout from '@/layouts/PublicLayout.vue'
 import PrivateLayout from '@/layouts/PrivateLayout.vue'
 import HomeView from '@/views/HomeView.vue'
 import TasksListView from '@/views/TasksListView.vue'
+import TasksUpdateView from '@/views/TasksUpdateView.vue'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path: '/tasks',
     component: PrivateLayout,
     children: [
+      {
+        path: ':id',
+        name: 'taskUpdate',
+        component: TasksUpdateView,
+      },
       {
         path: '',
         name: 'taskList',
