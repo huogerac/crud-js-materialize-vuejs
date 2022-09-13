@@ -3,11 +3,8 @@ VUETIFY
 - vue create
 - vue add vuetify
 - .prettierrc.js
-
-- Formatar a data da tarefa enviada para API para ISO
-- Form de data muda na pagina, mas nao do form.date
-- Criar componente toast
-- Pesquisar
+- adicionar fontawesome, `npm install @fortawesome/fontawesome-free -D` e alterar vuetify.js
+  https://vuetifyjs.com/en/features/icon-fonts/#font-awesome-5-icons
 
   "liveServer.settings.ignoreFiles": [
   ".vscode/**",
