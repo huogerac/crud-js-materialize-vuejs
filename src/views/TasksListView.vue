@@ -1,5 +1,5 @@
 <template>
-  <v-main class="overflow-hidden">
+  <v-main class="overflow-hidden mt-4">
     <v-container>
       <v-row>
         <v-col class="pa-1" cols="12" v-for="task in tasks" :key="task.id">
@@ -11,9 +11,11 @@
             <v-card-actions>
               <v-list-item class="grow">
                 <v-row align="center" justify="end">
-                  <v-btn icon color="grey"><v-icon>fas fa-pen</v-icon></v-btn>
-                  <v-btn icon color="grey"
-                    ><v-icon>far fa-trash-alt</v-icon></v-btn
+                  <v-btn x-small icon color="grey"
+                    ><v-icon>fas fa-pen fa-xs</v-icon></v-btn
+                  >
+                  <v-btn x-small icon color="grey"
+                    ><v-icon>far fa-trash-alt fa-xs</v-icon></v-btn
                   >
                 </v-row>
               </v-list-item>
