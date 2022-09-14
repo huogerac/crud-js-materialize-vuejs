@@ -19,13 +19,7 @@
           Gerenciando tarefas aprendendo VueJS + Vuetify + API Mock
         </p>
         <p>
-          <v-btn
-            x-large
-            rounded
-            color="primary"
-            dark
-            :to="{ name: 'taskList' }"
-          >
+          <v-btn x-large rounded color="primary" dark :to="{ name: 'login' }">
             Iniciar
           </v-btn>
         </p>

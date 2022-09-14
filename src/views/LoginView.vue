@@ -17,6 +17,7 @@
             <v-text-field
               v-model="password"
               label="Senha"
+              type="password"
               required
               outlined
               append-icon="fa-key"
@@ -34,6 +35,11 @@
               >Continuar <v-icon class="pl-3">fa-arrow-right</v-icon></v-btn
             >
           </v-form>
+          <p class="ma-4">
+            <span class="subtitle-1"
+              >Não tenho conta! Fazer <a href="">Cadastro</a></span
+            >
+          </p>
         </v-card>
       </v-col>
     </v-row>
@@ -41,16 +47,32 @@
 </template>
 
 <script>
+import TaskApi from '@/api/auth.api.js'
+
 export default {
   data: () => {
     return {
       loading: false,
       valid: false,
+      username: '',
+      password: '',
     }
   },
   methods: {
     login() {
-      this.$router.push({ name: 'taskList' })
+      this.loading = true
+      TaskApi.login(this.username, this.password)
+        .then((resp) => {
+          console.log('login ok', resp)
+          this.$router.push({ name: 'taskList' })
+        })
+        .catch((error) => {
+          console.log('login falhou', error)
+          //mostrar toast de usuário ou senha inválidos
+        })
+        .finally(() => {
+          this.loading = false
+        })
     },
   },
 }
