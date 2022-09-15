@@ -1,8 +1,12 @@
 <template>
   <v-container>
+    <!-- snackbar -->
+    <v-snackbar v-model="snackbar.show" :value="true" absolute left shaped top>
+      {{ snackbar.message }}
+    </v-snackbar>
     <v-row class="text-center">
       <v-col md="6" offset-md="3">
-        <v-card class="pa-4" outlined tile>
+        <v-card class="pa-4 rounded mt-6" outlined tile>
           <h2>Login</h2>
           <v-form v-model="valid">
             <v-text-field
@@ -47,7 +51,7 @@
 </template>
 
 <script>
-import TaskApi from '@/api/auth.api.js'
+import AuthApi from '@/api/auth.api.js'
 
 export default {
   data: () => {
@@ -56,19 +60,24 @@ export default {
       valid: false,
       username: '',
       password: '',
+      snackbar: {
+        show: false,
+        message: '',
+      },
     }
   },
   methods: {
     login() {
       this.loading = true
-      TaskApi.login(this.username, this.password)
+      AuthApi.login(this.username, this.password)
         .then((resp) => {
           console.log('login ok', resp)
           this.$router.push({ name: 'taskList' })
         })
         .catch((error) => {
           console.log('login falhou', error)
-          //mostrar toast de usuário ou senha inválidos
+          this.snackbar.message = 'Usuario ou senha invalida'
+          this.snackbar.show = true
         })
         .finally(() => {
           this.loading = false
