@@ -13,4 +13,16 @@ export default {
         })
     })
   },
+  removeTask: (taskId) => {
+    return new Promise((resolve, reject) => {
+      api
+        .delete(`/api/tasks/${taskId}`)
+        .then((response) => {
+          return resolve(response.data)
+        })
+        .catch((error) => {
+          return reject(error)
+        })
+    })
+  },
 }

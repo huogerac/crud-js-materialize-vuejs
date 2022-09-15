@@ -22,6 +22,7 @@ app.post('/api/auth/login', auth.find)
 app.post('/api/auth/signup', auth.find)
 // TASKS
 app.get('/api/tasks', tasks.getTasks)
+app.delete('/api/tasks/:id', tasks.remove)
 
 app.listen(config.PORT, () => {
   console.log(
