@@ -32,28 +32,23 @@
 </template>
 
 <script>
+import TasksApi from '@/api/tasks.api.js'
+
 export default {
   data: () => {
     return {
-      tasks: [
-        {
-          id: 1,
-          title: 'Task 1',
-        },
-        {
-          id: 2,
-          title: 'Task Two',
-        },
-        {
-          id: 3,
-          title: 'Task 3',
-        },
-        {
-          id: 4,
-          title: 'Task Four',
-        },
-      ],
+      tasks: [],
     }
+  },
+  methods: {
+    getTasks() {
+      TasksApi.getTasks().then((data) => {
+        this.tasks = data
+      })
+    },
+  },
+  created() {
+    this.getTasks()
   },
 }
 </script>

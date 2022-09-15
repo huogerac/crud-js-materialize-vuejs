@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 
 const config = require('./config')
 const auth = require('./controllers/auth')
+const tasks = require('./controllers/tasks')
 
 const YELLOW = '\x1b[33m%s\x1b[0m'
 const WHITE = '\x1b[37m'
@@ -16,8 +17,11 @@ app.use(bodyParser.json())
 
 app.use(cors({ credentials: true, origin: config.ORIGIN_URL }))
 
+// AUTH
 app.post('/api/auth/login', auth.find)
 app.post('/api/auth/signup', auth.find)
+// TASKS
+app.get('/api/tasks', tasks.getTasks)
 
 app.listen(config.PORT, () => {
   console.log(
