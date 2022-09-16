@@ -1,6 +1,10 @@
 const data = require('../data')
 const auth = require('./auth')
 
+function getMaxId(items) {
+  return Math.max(...items.map((item) => item.id))
+}
+
 module.exports = {
   find: (req, res) => {
     const loggedUser = auth.loginRequired(req, res)
@@ -25,7 +29,7 @@ module.exports = {
       return
     }
     const { title, project, status } = req.body
-    const id = data.tasks.length + 1
+    const id = getMaxId(data.tasks) + 1
     const newTask = {
       id,
       title,
