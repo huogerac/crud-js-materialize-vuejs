@@ -3,12 +3,28 @@
     "id": 1,
     "title": "Estudar Vuetify",
     "project": "Estudos",
-    "status": "pending"
+    "status": "done",
+    "date": null
   },
   {
     "id": 2,
     "title": "Estudar Vuex",
     "project": "Estudos",
-    "status": "pending"
+    "status": "pending",
+    "date": null
+  },
+  {
+    "id": 3,
+    "title": "Estudar Djavue",
+    "project": "Estudos",
+    "status": "pending",
+    "date": null
+  },
+  {
+    "id": 4,
+    "title": "Pagar Volei",
+    "project": "Contas",
+    "status": "pending",
+    "date": "2022-09-15T17:06:26.748Z"
   }
 ]

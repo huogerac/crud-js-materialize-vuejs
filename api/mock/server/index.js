@@ -24,6 +24,7 @@ app.use(cors({ credentials: true, origin: ORIGIN_URL }))
 app.post('/api/auth/login', auth.find)
 app.post('/api/auth/signup', auth.add)
 // TASKS
+app.get('/api/tasks/summary', tasks.summary)
 app.get('/api/tasks', tasks.find)
 app.get('/api/tasks/:id', tasks.find)
 app.post('/api/tasks', tasks.add)

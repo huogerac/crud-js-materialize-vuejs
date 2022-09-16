@@ -46,4 +46,19 @@ module.exports = {
     data.tasks.splice(index, 1)
     res.send(task)
   },
+  summary: (req, res) => {
+    let taskSummary = {}
+    for (let task of data.tasks) {
+      const key = task.project
+      if (!taskSummary.hasOwnProperty(key)) {
+        taskSummary[key] = {
+          pending: 0,
+          working: 0,
+          done: 0,
+        }
+      }
+      taskSummary[key][task.status] += 1
+    }
+    res.send(taskSummary)
+  },
 }

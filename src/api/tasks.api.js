@@ -25,4 +25,16 @@ export default {
         })
     })
   },
+  summary: () => {
+    return new Promise((resolve, reject) => {
+      api
+        .get('/api/tasks/summary')
+        .then((response) => {
+          return resolve(response.data)
+        })
+        .catch((error) => {
+          return reject(error)
+        })
+    })
+  },
 }
