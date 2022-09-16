@@ -6,12 +6,15 @@
         <h3>
           {{ item.group }} <v-chip class="ma-2"> {{ item.tasks }} </v-chip>
         </h3>
-        <v-progress-linear
-          color="light-blue"
-          height="20"
+        <v-progress-circular
+          :rotate="360"
+          :size="100"
+          :width="15"
           :value="item.percent"
-          striped
-        ></v-progress-linear>
+          color="pink"
+        >
+          {{ value }}
+        </v-progress-circular>
       </div>
       <div class="my-4">
         <v-btn rounded color="primary" dark :to="{ name: 'taskList' }">
