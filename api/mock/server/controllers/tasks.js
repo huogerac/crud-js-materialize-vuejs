@@ -1,20 +1,29 @@
 const data = require('../data')
+const auth = require('./auth')
 
 module.exports = {
   find: (req, res) => {
+    const loggedUser = auth.loginRequired(req, res)
+    if (!loggedUser) {
+      return
+    }
     const { id } = req.params
     if (id != undefined) {
       const task = data.tasks.find((t) => t.id == id)
-      if (!task) {
+      if (!task || task.userId != loggedUser.id) {
         res.status(404).end()
         return
       }
       res.send(task)
       return
     }
-    res.send(data.tasks)
+    res.send(data.tasks.filter((t) => t.userId == loggedUser.id))
   },
   add: (req, res) => {
+    const loggedUser = auth.loginRequired(req, res)
+    if (!loggedUser) {
+      return
+    }
     const { title, project, status } = req.body
     const id = data.tasks.length + 1
     const newTask = {
@@ -22,14 +31,19 @@ module.exports = {
       title,
       project,
       status,
+      userId: loggedUser.id,
     }
     data.tasks.push(newTask)
     res.send(newTask)
   },
   update: (req, res) => {
+    const loggedUser = auth.loginRequired(req, res)
+    if (!loggedUser) {
+      return
+    }
     const { id } = req.params
     const task = data.tasks.find((t) => t.id == id)
-    if (!id || !task) {
+    if (!id || !task || task.userId != loggedUser.id) {
       res.status(404).end()
       return
     }
@@ -40,6 +54,10 @@ module.exports = {
     res.send(task)
   },
   remove: (req, res) => {
+    const loggedUser = auth.loginRequired(req, res)
+    if (!loggedUser) {
+      return
+    }
     const { id } = req.params
     const task = data.tasks.find((t) => t.id === id)
     const index = data.tasks.indexOf(task)
@@ -47,8 +65,13 @@ module.exports = {
     res.send(task)
   },
   summary: (req, res) => {
+    const loggedUser = auth.loginRequired(req, res)
+    if (!loggedUser) {
+      return
+    }
     let taskSummary = {}
-    for (let task of data.tasks) {
+    const userTasks = data.tasks.filter((t) => t.userId == loggedUser.id)
+    for (let task of userTasks) {
       const key = task.project
       if (!taskSummary.hasOwnProperty(key)) {
         taskSummary[key] = {

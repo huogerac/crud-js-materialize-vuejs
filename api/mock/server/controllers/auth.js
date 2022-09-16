@@ -1,4 +1,5 @@
 const data = require('../data')
+const crypto = require('node:crypto')
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -36,6 +37,8 @@ module.exports = {
       if (!user) {
         res.status(404).end()
       }
+      // Gera Token para sessão de login/Autorização
+      user.token = crypto.randomUUID()
       res.send(user)
     })
   },
@@ -47,5 +50,19 @@ module.exports = {
     } catch (error) {
       res.status(404).end(error)
     }
+  },
+  loginRequired: (req, res) => {
+    const userid = req.headers['x-authorization-userid']
+    const usertoken = req.headers['x-authorization-usertoken']
+    if (!userid || !usertoken) {
+      res.status(401).end('Header de segurança não encontrado')
+      return false
+    }
+    const user = data.users.find((u) => u.id == userid)
+    if (!user || user.token != usertoken) {
+      res.status(401).end('Header de segurança inválido')
+      return false
+    }
+    return user
   },
 }

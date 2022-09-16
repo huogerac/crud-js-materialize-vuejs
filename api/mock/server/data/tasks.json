@@ -4,27 +4,39 @@
     "title": "Estudar Vuetify",
     "project": "Estudos",
     "status": "done",
-    "date": null
+    "date": null,
+    "userId": 1
   },
   {
     "id": 2,
     "title": "Estudar Vuex",
     "project": "Estudos",
     "status": "pending",
-    "date": null
+    "date": null,
+    "userId": 1
   },
   {
     "id": 3,
     "title": "Estudar Djavue",
     "project": "Estudos",
     "status": "pending",
-    "date": null
+    "date": null,
+    "userId": 1
   },
   {
     "id": 4,
     "title": "Pagar Volei",
     "project": "Contas",
     "status": "pending",
-    "date": "2022-09-15T17:06:26.748Z"
+    "date": "2022-09-15T17:06:26.748Z",
+    "userId": 1
+  },
+  {
+    "id": 5,
+    "title": "Voltar estudar Django",
+    "project": "Estudos",
+    "status": "pending",
+    "date": "2022-09-15T17:06:26.748Z",
+    "userId": 2
   }
 ]
