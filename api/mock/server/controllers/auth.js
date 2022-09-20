@@ -5,6 +5,10 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
+function getMaxId(items) {
+  return Math.max(...items.map((item) => item.id))
+}
+
 function getUser(username, password) {
   const user = data.users.find((user) => user.username === username)
   if (!user || password != username) {
@@ -14,16 +18,15 @@ function getUser(username, password) {
   return user
 }
 
-function addUser(username, name, email, password) {
+function addUser(name, username, password) {
   if (!password) {
     throw 'Invalid password!'
   }
-  const id = data.users.length + 1
+  const id = getMaxId(data.users) + 1
   const newUser = {
     id,
-    username,
     name,
-    email,
+    username,
   }
   data.users.push(newUser)
   return newUser
@@ -44,11 +47,15 @@ module.exports = {
   },
   add: (req, res) => {
     try {
-      const { username, name, email, password } = req.body
-      const newUser = addUser(username, name, email, password)
+      const { name, username, password } = req.body
+
+      if (name.length <= 3) {
+        throw 'Nome inválido'
+      }
+      const newUser = addUser(name, username, password)
       res.send(newUser)
     } catch (error) {
-      res.status(404).end(error)
+      res.status(400).end(error)
     }
   },
   loginRequired: (req, res) => {

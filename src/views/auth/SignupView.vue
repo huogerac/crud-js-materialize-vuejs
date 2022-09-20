@@ -7,20 +7,38 @@
     <v-row class="text-center">
       <v-col md="6" offset-md="3">
         <v-card class="pa-4 rounded mt-6" outlined tile>
-          <h2>Login</h2>
+          <h2>Cadastro</h2>
           <v-form v-model="valid">
             <v-text-field
+              v-model="name"
+              :rules="nameRules"
+              label="Nome Completo"
+              required
+              outlined
+              append-icon="fa-user"
+            ></v-text-field>
+            <v-text-field
               v-model="username"
+              :rules="usernameRules"
               label="Usuário"
               required
               outlined
               append-icon="fa-user"
-              v-on:keyup.enter="login"
             ></v-text-field>
 
             <v-text-field
               v-model="password"
               label="Senha"
+              type="password"
+              required
+              outlined
+              append-icon="fa-key"
+            ></v-text-field>
+
+            <v-text-field
+              v-model="passwordConfirm"
+              :rules="[passwordConfirmRules]"
+              label="Confrimar Senha"
               type="password"
               required
               outlined
@@ -35,14 +53,13 @@
               class="mr-4"
               x-large
               block
-              @click="login"
+              @click="signup"
               >Continuar <v-icon class="pl-3">fa-arrow-right</v-icon></v-btn
             >
           </v-form>
           <p class="ma-4">
             <span class="subtitle-1"
-              >Não tenho conta! Fazer
-              <router-link :to="{ name: 'signup' }">Cadastro</router-link></span
+              >Não tenho conta! Fazer <a href="">Cadastro</a></span
             >
           </p>
         </v-card>
@@ -59,8 +76,12 @@ export default {
     return {
       loading: false,
       valid: false,
+      name: '',
       username: '',
       password: '',
+      passwordConfirm: '',
+      nameRules: [(v) => !!v || 'Nome é obrigatório'],
+      usernameRules: [(v) => !!v || 'Nome é obrigatório'],
       snackbar: {
         show: false,
         message: '',
@@ -68,29 +89,21 @@ export default {
     }
   },
   methods: {
-    login() {
-      this.loading = true
-      AuthApi.login(this.username, this.password)
-        .then((user) => {
-          console.log('login ok', user)
-          this.saveLoggedUser(user)
-          this.$router.push({ name: 'taskSummary' })
+    signup() {
+      AuthApi.signup(this.name, this.username, this.password)
+        .then((data) => {
+          console.log('data', data)
+          this.$router.push({ name: 'login' })
         })
         .catch((error) => {
-          console.log('login falhou', error)
-          this.snackbar.message = 'Usuario ou senha invalida'
-          this.snackbar.show = true
-        })
-        .finally(() => {
-          this.loading = false
+          console.log('chegou um erro aqui gente:', error)
         })
     },
-    saveLoggedUser(user) {
-      console.log(user)
-      // Salva para usar nos request da API
-      window.localStorage.setItem('user', JSON.stringify(user))
-      window.localStorage.setItem('loggedUser', user.id)
-      window.localStorage.setItem('loggedUserToken', user.token)
+    passwordConfirmRules() {
+      if (this.password != this.passwordConfirm) {
+        return 'Senhas não conferem!'
+      }
+      return true
     },
   },
 }

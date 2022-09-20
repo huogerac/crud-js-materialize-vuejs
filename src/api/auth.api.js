@@ -15,4 +15,22 @@ export default {
         })
     })
   },
+  signup: (name, username, password) => {
+    return new Promise((resolve, reject) => {
+      let data = {
+        name,
+        username,
+        password,
+      }
+      api
+        .post('/api/auth/signup', data)
+        .then((response) => {
+          console.log('---signup', response)
+          resolve(response.data)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
 }
