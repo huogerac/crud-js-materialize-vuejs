@@ -85,6 +85,9 @@ export default {
         })
     },
     saveLoggedUser(user) {
+      console.log(user)
+      // Salva para usar nos request da API
+      window.localStorage.setItem('user', JSON.stringify(user))
       window.localStorage.setItem('loggedUser', user.id)
       window.localStorage.setItem('loggedUserToken', user.token)
     },

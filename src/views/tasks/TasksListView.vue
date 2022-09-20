@@ -1,5 +1,6 @@
 <template>
   <v-main class="overflow-hidden mt-4">
+    <PageBar :username="getLoggedUser.username" />
     <v-container>
       <v-row>
         <v-col class="pa-1" cols="12" v-for="task in tasks" :key="task.id">
@@ -32,6 +33,7 @@
 </template>
 
 <script>
+import PageBar from '@/components/PageBar.vue'
 import TasksApi from '@/api/tasks.api.js'
 
 export default {
@@ -39,6 +41,18 @@ export default {
     return {
       tasks: [],
     }
+  },
+  components: {
+    PageBar,
+  },
+  computed: {
+    getLoggedUser() {
+      // pega a string salva pelo login
+      const userStr = localStorage.getItem('user')
+      // converte de string salva no locastore para objeto JS, assim podemos user2.username
+      const user = JSON.parse(userStr)
+      return user
+    },
   },
   methods: {
     getTasks() {
